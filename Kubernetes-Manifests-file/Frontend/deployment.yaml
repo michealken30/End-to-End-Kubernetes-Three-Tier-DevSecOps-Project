@@ -6,7 +6,7 @@ metadata:
   labels:
     role: frontend
     env: demo
-spec: 
+spec:
   replicas: 1
   strategy:
     type: RollingUpdate
@@ -14,21 +14,22 @@ spec:
       maxSurge: 1
       maxUnavailable: 25%
   selector:
-    matchLabels: 
+    matchLabels:
       role: frontend
   template:
     metadata:
       labels:
         role: frontend
-    spec: 
+    spec:
       imagePullSecrets:
-      - name: ecr-registry-secret
+        - name: ecr-registry-secret
       containers:
-      - name: frontend
-        image: 970547377227.dkr.ecr.us-east-1.amazonaws.com/frontend:9
-        imagePullPolicy: Always
-        env:
-          - name: REACT_APP_BACKEND_URL
-            value: "http://michealken30.com.ng/api/tasks"
-        ports:
-        - containerPort: 3000
+        - name: frontend
+          image: 970547377227.dkr.ecr.us-east-1.amazonaws.com/frontend:9
+          imagePullPolicy: Always
+          # env:
+          #   - name: REACT_APP_BACKEND_URL
+          #     value: "http://michealken30.com.ng/api/tasks"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
